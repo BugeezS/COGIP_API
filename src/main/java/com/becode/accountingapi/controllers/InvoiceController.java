@@ -5,6 +5,7 @@ import com.becode.accountingapi.models.Invoice;
 import com.becode.accountingapi.services.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ public class InvoiceController {
         this.invoiceService = invoiceService;
     }
     @GetMapping
+    @Secured({"ROLE_ADMIN", "ROLE_ACCOUNTANT"})
     public ResponseEntity<List<Invoice>> getAllInvoices(){
         List<Invoice> invoices = invoiceService.getAllInvoices();
         return ResponseEntity.ok(invoices);
