@@ -43,8 +43,9 @@ public class SecurityConfig {
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
                                 .dispatcherTypeMatchers(HttpMethod.valueOf("/api/public/**")).permitAll() // Allow public access
+                                .dispatcherTypeMatchers(HttpMethod.valueOf("/h2-console/login.jsp")).hasRole("ADMIN") // Allow public access
                                 .dispatcherTypeMatchers(HttpMethod.valueOf("/api/admin/**")).hasRole("ADMIN") // Require ADMIN role
-                                .dispatcherTypeMatchers(HttpMethod.valueOf("/api/accountant/**")).hasRole("ACCOUNTANT") // Require ACCOUNTANT role
+                                .dispatcherTypeMatchers(HttpMethod.valueOf(("/api/accountant/**"))).hasRole("ACCOUNTANT") // Require ACCOUNTANT role
                                 .dispatcherTypeMatchers(HttpMethod.valueOf("/api/intern/**")).hasRole("INTERN") // Require INTERN role
                                 .anyRequest().authenticated() // Any other request requires authentication
                 )
