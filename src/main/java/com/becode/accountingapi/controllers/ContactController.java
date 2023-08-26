@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/contacts")
+@RequestMapping("/api/v1/auth/contacts")
 public class ContactController {
     private final ContactService contactService;
     @Autowired

@@ -25,8 +25,10 @@ public class SecurityConfig {
                 .disable()
                 .authorizeRequests()
                 .requestMatchers(
-                        new AntPathRequestMatcher("/api/v1/auth/**", "GET"),
-                        new AntPathRequestMatcher("/api/v1/auth/**", "POST")
+                        new AntPathRequestMatcher("/api/v1/**", "GET"),
+                        new AntPathRequestMatcher("/api/v1/**", "POST"),
+                        new AntPathRequestMatcher("/error", "GET"),
+                        new AntPathRequestMatcher("/error", "POST")
                 )
                 .permitAll()
                 .anyRequest()
