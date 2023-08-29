@@ -42,8 +42,8 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .signWith(generateRandomKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -70,11 +70,9 @@ public class JwtService {
     }
 
     private Key generateRandomKey() {
-        byte[] keyBytes = new byte[32]; // You can adjust the key size
-
+        byte[] keyBytes = new byte[32];
         SecureRandom secureRandom = new SecureRandom();
         secureRandom.nextBytes(keyBytes);
-
         Key key = new SecretKeySpec(keyBytes, SignatureAlgorithm.HS256.getJcaName());
         logger.debug("Generated Key: " + key);
         return key;
